@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+  server:
+    #build: ./server/builds/
+    image: serv/server
+    container_name: server
+    ports:
+      - "3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+        
+  db:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./db/create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: >
+        psql -U postgres
+      interval: ${HC_INTERVAL}
+      timeout: ${HC_TIMEOUT}
+      retries: ${HC_RETRIES}
+     
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+    ports:
+      - "5050:80"
+    depends_on:
+      - db  
+
