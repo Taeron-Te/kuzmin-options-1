@@ -23,7 +23,7 @@ Folder in project - /scripts
 9. Reading data - bash reading_data_project.sh $1 $2 $3 ($1 - localhost, $2 - 3001, $3 - admin_token from point 8)
 ## Steps
 0. open CMD or PowerShell
-0. 1. cd *your path to this folder*/options-1/scripts
+0. 1. cd *your path to this folder*/kuzmin-options-1/scripts
 0. 1. wsl (to run Linux shell)
 1. bash build.sh
 2. bash start.sh
